@@ -200,6 +200,10 @@ var circles = false;
 		console.log("Mouse clicked");
 		x = parseInt(evt.offsetX)
 		y = height - parseInt(evt.offsetY)
+		if (isNaN(x)) {
+			x = evt.layerX;
+			y = height - evt.layerY;
+		}
 		currentObject = getObjectUnderMouseCursor(x, y)
 		console.log(currentObject);
 		if (currentObject!=0) {
@@ -210,6 +214,10 @@ var circles = false;
 	function mouseMoved(evt) {
 		x = parseInt(evt.offsetX);
 		y = height - parseInt(evt.offsetY);
+		if (isNaN(x)) {
+			x = evt.layerX;
+			y = height - evt.layerY;
+		}
 		cursorString = " (" + x + ", " + y + ")";
 		currentObject = getObjectUnderMouseCursor(x, y);
 		if (currentObject!=0) cursorString+= " [" + currentObject.id + "]";
