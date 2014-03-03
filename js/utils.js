@@ -20,7 +20,7 @@ var circles = false;
 		rJSONFile = runName + "r.json";
 		gJSONFile = runName + "g.json";
 		bJSONFile = runName + "b.json";
-		imageFile = runName + "deepimager.png";
+		imageFile = runName + "_r.png";
 		
 		$.getJSON(rgbJSONFile, jsonLoadedRGB);
 		$.getJSON(rJSONFile, function (data) {
@@ -58,6 +58,7 @@ var circles = false;
 			masterObjectList[i].y = redObjectList[masterObjectList[i].red_id].y; 
 		}
 		drawObjectTable();
+		toggleCircles();
 	}
 	
 	function handleKeyPressed(e) {
@@ -277,17 +278,18 @@ var circles = false;
 	
 	function undrawCircles() {
 		clearCanvas();
-		loadPNG();
+		loadPNG(imageFile);
 	}			
 	
 	function drawCircles() {
 		console.log("Drawing circles");
       		context.lineWidth = 3;
       		context.strokeStyle = '#003300';
-      		objects = filteredObjectList;
+      		objects = redObjectList;
 		for (i in objects) {
 			x = objects[i].x
 			y = height - objects[i].y
+			console.log(x, y)
 			context.beginPath();
 	      		context.arc(x, y, 15, 0, 2 * Math.PI, false);
 	      		context.stroke();
